@@ -1,17 +1,20 @@
 # Use the Natural CE image as a parent image
 FROM store/softwareag/natural-ce:9.1.1
 
-# Set the user to sagadmin
-USER sagadmin
+# Install Python
+# RUN yum update && yum install python
 
 # Set the working directory
-WORKDIR .
+# WORKDIR .
 
 # Copy NATCONF.CFG into the container with custom fuser definition
 COPY --chown=sagadmin ./NATCONF.CFG /opt/softwareag/Natural/etc/NATCONF.CFG
 
 # Copy the Natural source code into the custom fuser
 COPY --chown=sagadmin ./Natural-Libraries/MAIN /fuser/MAIN
+
+# Set the user to sagadmin
+USER sagadmin
 
 # Start the buffer pool
 # Run the ftouch utility to build a new FILEDIR.SAG
@@ -30,9 +33,8 @@ RUN cat /tmp/out
 # Make port 80 available
 EXPOSE 80
 
-# Define an environment variable
-ENV FOO BAR
+# Accept the licence agreement
+ENV ACCEPT_EULA Y
 
-# Run HELLO.NSP
-# CMD ["natural", "stack=(logon main;hello;fin)"]
-
+# Run service.py when the container starts
+ENTRYPOINT [ "python", "service.py" ]
