@@ -4,6 +4,9 @@ FROM store/softwareag/natural-ce:9.1.1
 # Install Python
 # RUN yum update && yum install python
 
+# Install Flask
+RUN pip install --trusted-host pypi.python.org Flask
+
 # Set the working directory
 # WORKDIR .
 
@@ -12,6 +15,9 @@ COPY --chown=sagadmin ./NATCONF.CFG /opt/softwareag/Natural/etc/NATCONF.CFG
 
 # Copy the Natural source code into the custom fuser
 COPY --chown=sagadmin ./Natural-Libraries/MAIN /fuser/MAIN
+
+# Copy service.py to /service
+COPY --chown=sagadmin ./service.py /service/service.py
 
 # Set the user to sagadmin
 USER sagadmin
@@ -37,4 +43,4 @@ EXPOSE 80
 ENV ACCEPT_EULA Y
 
 # Run service.py when the container starts
-ENTRYPOINT [ "python", "service.py" ]
+ENTRYPOINT [ "python", "/service/service.py" ]
