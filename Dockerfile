@@ -4,6 +4,9 @@ FROM store/softwareag/natural-ce:9.1.1
 # Install Python
 # RUN yum update && yum install python
 
+# Install pip
+RUN yum update && yum install pip
+
 # Install Flask
 RUN pip install --trusted-host pypi.python.org Flask
 
