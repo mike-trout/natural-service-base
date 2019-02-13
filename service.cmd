@@ -1,0 +1,3 @@
+logon main
+hello
+fin

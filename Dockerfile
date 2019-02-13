@@ -22,8 +22,9 @@ COPY --chown=sagadmin ./NATCONF.CFG /opt/softwareag/Natural/etc/NATCONF.CFG
 # Copy the Natural source code into the custom fuser
 COPY --chown=sagadmin ./Natural-Libraries/MAIN /fuser/MAIN
 
-# Copy service.py to /service
+# Copy service.py and service.cmd to /service
 COPY --chown=sagadmin ./service.py /service/service.py
+COPY --chown=sagadmin ./service.cmd /service/service.cmd
 
 # Set the user to sagadmin
 USER sagadmin
@@ -39,8 +40,8 @@ RUN /opt/softwareag/Natural/bin/natbpsrv BPID=natbp \
     && natural parm=natparm batchmode cmsynin=/tmp/cmd cmobjin=/tmp/cmd cmprint=/tmp/out natlog=err \
     && rm /tmp/cmd
 
-# Check output of catall
-RUN cat /tmp/out
+# Check output of catall and remove the temporary file
+RUN cat /tmp/out && rm /tmp/out
 
 # Make port 80 available
 EXPOSE 80
@@ -54,3 +55,5 @@ USER root
 # Run service.py when the container starts
 ENTRYPOINT [ "python", "/service/service.py" ]
 
+# Start the buffer pool service
+CMD [ "natbpsrv", "BPID=natbp" ]
