@@ -1,11 +1,14 @@
 # Use the Natural CE image as a parent image
 FROM store/softwareag/natural-ce:9.1.1
 
+# Change user to root
+USER root
+
 # Install Python
-# RUN yum update && yum install python
+# RUN yum -y update && yum -y install python
 
 # Install pip
-RUN yum update && yum install pip
+RUN yum -y install epel-release && yum -y install python-pip
 
 # Install Flask
 RUN pip install --trusted-host pypi.python.org Flask
@@ -45,5 +48,9 @@ EXPOSE 80
 # Accept the licence agreement
 ENV ACCEPT_EULA Y
 
+# Change user to root
+USER root
+
 # Run service.py when the container starts
 ENTRYPOINT [ "python", "/service/service.py" ]
+
