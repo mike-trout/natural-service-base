@@ -34,7 +34,7 @@ USER sagadmin
 # Set up a command file to CATALL library MAIN
 # Start Natural in batch mode and run the command file
 # Remove the command file
-RUN /opt/softwareag/Natural/bin/natbpsrv BPID=natbp \
+RUN natbpsrv bpid=natbp \
     && ftouch parm=natparm lib=main sm -s -d \
     && printf "logon main\ncatall ** all catalog\nfin\n" > /tmp/cmd \
     && natural parm=natparm batchmode cmsynin=/tmp/cmd cmobjin=/tmp/cmd cmprint=/tmp/out natlog=err \
@@ -52,8 +52,8 @@ ENV ACCEPT_EULA Y
 # Change user to root
 USER root
 
-# Run service.py when the container starts
-ENTRYPOINT [ "python", "/service/service.py" ]
-
 # Start the buffer pool service
-CMD [ "natbpsrv", "BPID=natbp" ]
+# CMD natbpsrv bpid=natbp && python /service/service.py
+
+# Run service.py when the container starts
+ENTRYPOINT natbpsrv bpid=natbp && python /service/service.py
