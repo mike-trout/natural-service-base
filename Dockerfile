@@ -7,14 +7,11 @@ USER root
 # Install Python
 # RUN yum -y update && yum -y install python
 
-# Install pip
-RUN yum -y install epel-release && yum -y install python-pip
-
-# Install Flask
-RUN pip install --trusted-host pypi.python.org Flask
-
-# Set the working directory
-# WORKDIR .
+# Update yum and install pip and Flask
+RUN yum -y update \
+    && yum -y install epel-release \
+    && yum -y install python-pip \
+    && pip install --trusted-host pypi.python.org Flask
 
 # Copy NATCONF.CFG into the container with custom fuser definition
 COPY --chown=sagadmin ./NATCONF.CFG /opt/softwareag/Natural/etc/NATCONF.CFG
@@ -30,18 +27,17 @@ COPY --chown=sagadmin ./service.cmd /service/service.cmd
 USER sagadmin
 
 # Start the buffer pool
-# Run the ftouch utility to build a new FILEDIR.SAG
-# Set up a command file to CATALL library MAIN
-# Start Natural in batch mode and run the command file
-# Remove the command file
+# and then run the ftouch utility to build a new FILEDIR.SAG
+# and then set up a command file to CATALL library MAIN
+# and then start Natural in batch mode and run the command file
+# and then remove the command file
+# and the check the output of catall and remove the temporary file
 RUN natbpsrv bpid=natbp \
     && ftouch parm=natparm lib=main sm -s -d \
     && printf "logon main\ncatall ** all catalog\nfin\n" > /tmp/cmd \
     && natural parm=natparm batchmode cmsynin=/tmp/cmd cmobjin=/tmp/cmd cmprint=/tmp/out natlog=err \
-    && rm /tmp/cmd
-
-# Check output of catall and remove the temporary file
-RUN cat /tmp/out && rm /tmp/out
+    && rm /tmp/cmd \
+    && cat /tmp/out && rm /tmp/out
 
 # Make port 80 available
 EXPOSE 80
@@ -53,7 +49,5 @@ ENV ACCEPT_EULA Y
 USER root
 
 # Start the buffer pool service
-# CMD natbpsrv bpid=natbp && python /service/service.py
-
-# Run service.py when the container starts
+# and run service.py when the container starts
 ENTRYPOINT natbpsrv bpid=natbp && python /service/service.py
