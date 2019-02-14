@@ -15,7 +15,7 @@ def service():
         print(line)
     retval = p.wait()
     print(retval)
-    f = open("/tmp/test.out", "r")
+    f = open("/tmp/service.out", "r")
     return f.read()
 
 
