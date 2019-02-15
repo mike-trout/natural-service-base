@@ -23,6 +23,9 @@ COPY --chown=sagadmin ./Natural-Libraries/MAIN /fuser/MAIN
 COPY --chown=sagadmin ./service.py /service/service.py
 COPY --chown=sagadmin ./service.cmd /service/service.cmd
 
+# Copy the customised entrypoint.sh
+COPY --chown=sagadmin ./entrypoint.sh /opt/softwareag/Natural/bin/entrypoint.sh
+
 # Set the user to sagadmin
 USER sagadmin
 
@@ -50,4 +53,5 @@ USER root
 
 # Start the buffer pool service
 # and run service.py when the container starts
-ENTRYPOINT entrypoint.sh && python /service/service.py
+# ENTRYPOINT entrypoint.sh && python /service/service.py
+ENTRYPOINT [ "entrypoint.sh" ]
