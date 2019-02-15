@@ -50,4 +50,4 @@ USER root
 
 # Start the buffer pool service
 # and run service.py when the container starts
-ENTRYPOINT natbpsrv bpid=natbp && python /service/service.py
+ENTRYPOINT entrypoint.sh && python /service/service.py
