@@ -1,3 +1,3 @@
 logon main
-hello
+service
 fin
