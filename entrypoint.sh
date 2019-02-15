@@ -166,10 +166,12 @@ export PATH="${NAT_HOME}/bin:${ACLDIR}/bin:${PATH}"
 # Starting buffer pool server
 start_bp
 
+# Start service
+echo "Starting service"
+nohup python /service/service.py &
+echo "Command finished with " $?
+
 # Start NDV server
 start_ndv
-
-# Start service
-python service.py
 
 # clean_up
