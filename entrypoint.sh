@@ -158,7 +158,6 @@ pre_check_license
 copy_all_config_files
 
 # source ACL environment
-
 . /opt/softwareag/AdabasClient/INSTALL/aclenv
 
 # Setting necessary environment variables
@@ -167,7 +166,10 @@ export PATH="${NAT_HOME}/bin:${ACLDIR}/bin:${PATH}"
 # Starting buffer pool server
 start_bp
 
+# Start NDV server
 start_ndv
 
-# clean_up
+# Start service
+python service.py
 
+# clean_up
