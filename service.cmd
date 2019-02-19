@@ -1,3 +1,0 @@
-logon main
-service
-fin
