@@ -15,7 +15,7 @@ def get():
         print(line)
     retval = p.wait()
     print(retval)
-    f = open("/tmp/out", "r")
+    f = open("/tmp/service.out", "r")
     return f.read()
 
 
@@ -27,7 +27,7 @@ def post():
         print(line)
     retval = p.wait()
     print(retval)
-    f = open("/tmp/out", "r")
+    f = open("/tmp/service.out", "r")
     return f.read()
 
 
