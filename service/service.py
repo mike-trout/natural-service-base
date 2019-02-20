@@ -18,7 +18,7 @@ def get():
         print(line)
     retval = p.wait()
     print(retval)
-    f = os.open(serviceOutput, "r")
+    f = open(serviceOutput, "r")
     return f.read()
 
 
@@ -32,7 +32,7 @@ def post():
         print(line)
     retval = p.wait()
     print(retval)
-    f = os.open(serviceOutput, "r")
+    f = open(serviceOutput, "r")
     return f.read()
 
 
