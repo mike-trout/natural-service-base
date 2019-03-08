@@ -1,3 +1,0 @@
-LOGON MAIN
-GET
-FIN
