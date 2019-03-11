@@ -12,14 +12,16 @@ echo "Starting up buffer pool at `date`"
 cd ${NAT_HOME}/bin/
 options="BPID=natbp"
 natbpsrv=${NAT_HOME}/bin/natbpsrv	
-if [ -r ${natbpsrv} ] then
-	echo starting natural bufferpool server with the command
-	echo ${natbpsrv} ${options}
+if [ -r ${natbpsrv} ]
+then
+	echo "starting natural bufferpool server with the command"
+	echo "${natbpsrv} ${options}"
 	${natbpsrv} ${options}
-	if [ $? -ne 0 ] then
-   		echo "Error:NATURAL bufferpool server start failed"
+	if [ $? -ne 0 ]
+	then
+   		echo "Error: NATURAL bufferpool server start failed"
 	else
-   		echo NATURAL bufferpool server started
+   		echo "NATURAL bufferpool server started"
 	fi
 else
 	echo "ERROR: ${natbpsrv}: not found or not executable"
@@ -28,5 +30,5 @@ fi
 
 # Start service
 echo "Starting service"
-nohup python /service/service.py &
-echo "Command finished with " $?
+python /service/service.py
+
