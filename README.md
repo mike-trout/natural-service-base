@@ -1,4 +1,9 @@
-# Base Docker image for SoftwareAG Natural micro-services
+# Base Docker image for Software AG Natural micro-services
 
-<p>This is a proof-of-concept for creating SoftwareAG Natural micro-services.</p>
-<p>Current plan is to use Python and Flask to invoke Natural and run a program when a GET request is made. The  output of the program is a work file. The work file is read once the program has completed executing and the contents are returned in the HTTP response.</p>
+This is the project for the base image for creating Software AG Natural micro-services.
+
+To build the image locally, run:
+
+#### `docker build --tag employees-service .`
+
+The image is automatically built to [dockerhub](https://hub.docker.com/r/miketrout/natural-service-base) on a commit to master as `miketrout/natural-service-base:latest`.
