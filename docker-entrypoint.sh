@@ -4,10 +4,10 @@ set -e
 # Source ACL environment
 . /opt/softwareag/AdabasClient/INSTALL/aclenv
 
-# Setting necessary environment variables
+# Set necessary environment variables
 export PATH="${NAT_HOME}/bin:${ACLDIR}/bin:${PATH}"
 
-# Starting buffer pool server
+# Start buffer pool server
 echo "Starting up buffer pool at `date`"
 cd ${NAT_HOME}/bin/
 options="BPID=natbp"
@@ -31,4 +31,3 @@ fi
 # Start service
 echo "Starting service"
 python /service/service.py
-
