@@ -19,10 +19,9 @@ RUN chmod +x /bin/docker-entrypoint.sh
 # Copy NATCONF.CFG into the container with custom fuser definition
 COPY ./NATCONF.CFG /opt/softwareag/Natural/etc/NATCONF.CFG
 
-# Update and install pip and Flask
-RUN yum -q -y update \
-    && yum -q -y install epel-release \
-    && yum -q -y install python-pip \
+# Install pip and Flask
+RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py \
+    && python get-pip.py \
     && pip install --quiet --trusted-host pypi.python.org Flask
 
 # Make port 80 available
