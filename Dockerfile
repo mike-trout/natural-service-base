@@ -1,5 +1,5 @@
 # Use the Natural CE image as a parent image
-FROM store/softwareag/natural-ce:9.1.1
+FROM store/softwareag/natural-ce:9.1.2
 
 # Change user to root
 USER root
