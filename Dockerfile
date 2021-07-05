@@ -20,7 +20,7 @@ RUN chmod +x /bin/docker-entrypoint.sh
 COPY ./NATCONF.CFG /opt/softwareag/Natural/etc/NATCONF.CFG
 
 # Install pip and Flask
-RUN curl https://bootstrap.pypa.io/2.7/get-pip.py -o get-pip.py \
+RUN curl https://bootstrap.pypa.io/pip/2.7/get-pip.py -o get-pip.py \
     && python get-pip.py \
     && pip install --quiet --trusted-host pypi.python.org Flask
 
